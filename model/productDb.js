@@ -13,4 +13,17 @@ const getProductDb = async (id)=>{
     return data
 }
 
-export {getProductsDb, getProductDb}
+const addProductDb = async (prodName,quantity,amount,category,prodUrl,prodDesc)=>{
+    await pool.query(`
+        INSERT INTO products(prodName,quantity,amount,category,prodUrl,prodDesc)
+        VALUES (?,?,?,?,?,?)`,[prodName,quantity,amount,category,prodUrl,prodDesc])
+}
+
+const deleteProductDb = async (id)=>{
+    await pool.query(`
+        DELETE
+        FROM products
+        WHERE prodID = ?`,[id])
+}
+
+export {getProductsDb, getProductDb, addProductDb, deleteProductDb}
