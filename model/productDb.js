@@ -1,9 +1,10 @@
 import {pool} from '../config/config.js'
 
 const getProductsDb = async ()=>{
-    let [data] = await pool.query('SELECT * FROM products')
+    let [[data]] = await pool.query('SELECT * FROM products')
     return data
 }
+
 
 const getProductDb = async (id)=>{
     let [[data]] = await pool.query(`
@@ -27,10 +28,11 @@ const deleteProductDb = async (id)=>{
 }
 
 const recentProductsDb = async()=>{
-    let [data] = await pool.query(`
+    let [[data]] = await pool.query(`
     SELECT *
     FROM products
-    ORDER BY prodID desc`)
+    ORDER BY prodID desc
+    LIMIT 5`)
     return data
 }
 
