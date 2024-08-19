@@ -1,5 +1,6 @@
-<template>
-  <nav class="navbar navbar-expand-lg" id="navbar">
+
+  <template>
+    <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html" id="logo"><span id="span1">K</span><span>yYola</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +27,8 @@
         </div>
       </div>
     </nav>
-</template>
+  </template>
+
 
 <script>
 export default {
@@ -35,5 +37,35 @@ export default {
 </script>
 
 <style>
-
+#navbar{
+    background-color: #162052;
+}
+#logo{
+    margin-left: 15px;
+    color: rgb(246, 3, 3);
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+#logo span{
+    color: orange;
+}
+#logo #span1{
+    font-size: 30px;
+}
+.navbar-nav{
+    margin-left: 20px;
+}
+.nav-item{
+    margin-left: 10px;
+}
+.nav-item .nav-link{
+    color: orange;
+    margin-left: 2px;
+    text-shadow: 0px 0px 1px black;
+    transition: 0.5s ease;
+}
+.nav-item .nav-link:hover{
+    color: blue;
+}
 </style>
