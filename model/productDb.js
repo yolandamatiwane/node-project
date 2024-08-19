@@ -26,4 +26,9 @@ const deleteProductDb = async (id)=>{
         WHERE prodID = ?`,[id])
 }
 
-export {getProductsDb, getProductDb, addProductDb, deleteProductDb}
+const recentProductsDb = async()=>{
+    let [data] = await pool.query('SELECT * FROM products ORDER BY prodID DESC LIMIT 5')
+    return data
+}
+
+export {getProductsDb, getProductDb, addProductDb, deleteProductDb, recentProductsDb}
