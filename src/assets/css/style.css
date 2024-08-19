@@ -9,3 +9,20 @@
 body{
     background-color: #a9a9a92b;
 }
+
+/* Display - grid */
+:is(#app) {
+    display: grid;
+}
+
+/* Display - flex */
+
+/* APP */
+#app {
+    grid-template-rows: auto minmax(100dvh, 100%) auto;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}

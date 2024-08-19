@@ -21,7 +21,7 @@
                         <router-link class="nav-link" to="/admin">Admin</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/reachUs">Reach us</router-link>
+                        <router-link class="nav-link" to="/reachus">Reach us</router-link>
                     </li>
                 </ul>
         </div>
