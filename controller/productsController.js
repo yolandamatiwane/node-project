@@ -5,6 +5,7 @@ const fetchProducts = async (req,res)=>{
     res.json(await getProductsDb())
 }
 
+
 const fetchProduct = async (req,res)=>{
     res.json(await getProductDb(req.params.id))
 }
