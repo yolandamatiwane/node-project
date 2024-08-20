@@ -5,7 +5,7 @@ const getProductsDb = async ()=>{
     return data
 }
 
-console.log(await getProductsDb())
+// console.log(await getProductsDb())
 
 
 const getProductDb = async (id)=>{
@@ -37,6 +37,8 @@ const recentProductsDb = async()=>{
     LIMIT 5`)
     return data
 }
+
+// console.log(await recentProductsDb())
 
 const editProductsDb = async (id,prodName,quantity,amount,category,prodUrl,prodDesc)=>{
     let [data] = await pool.query(`
