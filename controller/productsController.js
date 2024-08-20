@@ -18,4 +18,6 @@ const removeProduct = async (req,res)=>{
     await deleteProductDb(req.params.id)
 }
 
+
+
 export {fetchProducts, fetchProduct, addProduct, removeProduct}
