@@ -2,7 +2,7 @@ import { getProductsDb, getProductDb, addProductDb, deleteProductDb , editProduc
 
 
 const fetchProducts = async (req,res)=>{
-    res.json(await getProductsDb())
+    res.json({results:await getProductsDb()})
 }
 
 const fetchProduct = async (req,res)=>{
