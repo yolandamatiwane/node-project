@@ -20,12 +20,53 @@
       </div>
     </div> -->
    </section>
+   <!-- <section>
+    <div class="container">
+    <div class="row">
+      <h2 class="display-2">Welcome to our store</h2>
+    </div>
+    <div class="row">
+      <h4 class="display-4">Recent products</h4>
+    </div>
+    <div class="row gap-2 justify-content-center" v-if="recentProducts">
+
+      <Card v-for="product in recentProducts" :key="product.prodID">
+        <template #cardHeader>
+          {{ product.prodUrl }}
+          <img :src="product.prodUrl" loading="lazy" class="img-fluid" :alt="product.prodName">
+        </template>
+        <template #cardBody>
+          <h5 class="card-title fw-bold">{{ product.prodName }}</h5>
+          <p class="lead">{{ product.prodDesc }}</p>
+          <p class="lead"><span class="text-success fw-bold">Amount</span>: R{{ product.amount }}</p>
+        </template>
+      </Card>
+    </div>
+    <div v-else>
+      <Spinner />
+    </div>
+  </div>
+   </section> -->
 </template>
 
 <script>
-export default {
-
-}
+// import Card from '@/components/Card.vue'
+// import Spinner from '@/components/Spinner.vue'
+// export default {
+//   name: 'HomeView',
+//   components: {
+//     Card,
+//     Spinner
+//   },
+//   computed: {
+//     recentProducts() {
+//       return this.$store.state.recentProducts
+//     }
+//   },
+//   mounted() {
+//     this.$store.dispatch('recentProducts')
+//   }
+// }
 </script>
 
 <style>
@@ -56,6 +97,7 @@ export default {
     color: #162052;
     font-weight: bold;
     margin-left: 23px;
+    margin-right: 23px;
     font-size: 55px;
     text-shadow: -1px 1px 1px black;
 }
@@ -68,6 +110,7 @@ export default {
 }
 .content p{
     margin-left: 23px;
+    margin-right: 23px;
 }
 .btn{
     margin-left: 13px;
