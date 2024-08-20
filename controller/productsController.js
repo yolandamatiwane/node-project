@@ -12,21 +12,41 @@ const fetchProducts = async (req,res)=>{
 }
 
 const fetchProduct = async (req,res)=>{
-    res.json(await getProductDb(req.params.id))
+    try{
+        res.json(await getProductDb(req.params.id))
+    }catch(err){
+        res.send('There was an issue with fetching single Product')
+        throw err
+    }
 }
 
-const fetchRecentProducts = async (req,res)=>{    
+const fetchRecentProducts = async (req,res)=>{ 
+    try{
     res.json(await recentProductsDb())
+    }catch(err){
+        res.send('There was an issue with fetching Recent Products')
+        throw err
+    }
 }
 
 
 const addProduct = async (req,res)=>{
     let {prodName,quantity,amount,category,prodUrl,prodDesc} = req.body
-    await addProductDb(prodName,quantity,amount,category,prodUrl,prodDesc)
+    try{
+        await addProductDb(prodName,quantity,amount,category,prodUrl,prodDesc)
+    }catch(err){
+        res.send('There was an issue with adding Product')
+        throw err
+    }
 }
 
 const removeProduct = async (req,res)=>{
-    await deleteProductDb(req.params.id)
+    try{
+        await deleteProductDb(req.params.id)
+    } catch(err){
+        res.send('There was an issue with removing Product')
+        throw err
+    }
 }
 
 
@@ -40,8 +60,12 @@ const updateProducts = async (req,res)=>{
     category? category=category : category = products.category
     prodUrl? prodUrl=prodUrl : prodUrl = products.prodUrl
     prodDesc? prodDesc=prodDesc : prodDesc = products.prodDesc
-
-    res.json(await editProductsDb(req.params.id,prodName,quantity,amount,category,prodUrl,prodDesc))
+    try{
+        res.json(await editProductsDb(req.params.id,prodName,quantity,amount,category,prodUrl,prodDesc))
+    }catch (err){
+        res.send('There was an issue with updating Product')
+        throw err
+    }
 
 }
 export {fetchProducts, fetchProduct, addProduct, removeProduct , updateProducts, fetchRecentProducts}

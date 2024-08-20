@@ -38,10 +38,23 @@ const updateUser = async (req,res)=>{
     Gender? Gender=Gender : Gender = user.Gender
     userRole? userRole=userRole : userRole = user.userRole
     emailAdd? emailAdd=emailAdd : emailAdd = user.emailAdd
-    userPass? userPass=userPass : userPass = user.userPass
+    // userPass? userPass=userPass : userPass = user.userPass
     userProfile? userProfile=userProfile : userProfile = user.userProfile
     console.log(user)
-    res.json(await editUsersDb(req.params.id,firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile))
+    if(userPass!=''){
+        hash(userPass,10,async (err,hashedP)=>{
+            // if(err){
+            //     console.log(hashedP)
+            // }    
+            userPass = hashedP
+            await editUsersDb(req.params.id,firstName,lastName,userAge,Gender,userRole,emailAdd,hashedP,userProfile)
+        })
+
+    }else{
+        userPass = user.userPass
+        res.json(await editUsersDb(req.params.id,firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile))
+    }
+
 }
 
 
