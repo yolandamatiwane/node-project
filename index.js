@@ -1,5 +1,5 @@
 import express from 'express'
-
+import userRouter from './routes/usersRouter.js'
 import productRouter from './routes/productsRouter.js'
 import cors from 'cors'
 let port = process.env.PORT  || 3001
@@ -10,6 +10,7 @@ app.use(express.json())
 
 app.use(express.static('public'))
 app.use('/products',productRouter)
+app.use('/users',userRouter)
 
 app.listen(port,()=>{
     console.log('http://localhost:'+port)

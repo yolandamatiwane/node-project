@@ -13,6 +13,7 @@ const fetchRecentProducts = async (req,res)=>{
     res.json(await recentProductsDb())
 }
 
+
 const addProduct = async (req,res)=>{
     let {prodName,quantity,amount,category,prodUrl,prodDesc} = req.body
     await addProductDb(prodName,quantity,amount,category,prodUrl,prodDesc)
