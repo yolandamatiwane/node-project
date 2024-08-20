@@ -1,16 +1,21 @@
+
 import { getProductsDb, getProductDb, addProductDb, deleteProductDb , editProductsDb , recentProductsDb } from "../model/productDb.js";
 
 
 const fetchProducts = async (req,res)=>{
-    res.json(await getProductsDb())
+    try{
+        res.json(await getProductsDb())
+    }catch (err){
+        res.send('There was an issue with fetching Products')
+        throw err
+    }
 }
-
 
 const fetchProduct = async (req,res)=>{
     res.json(await getProductDb(req.params.id))
 }
 
-const fetchRecentProducts = async (req,res)=>{
+const fetchRecentProducts = async (req,res)=>{    
     res.json(await recentProductsDb())
 }
 

@@ -1,5 +1,5 @@
 import { getUsersDb, getUserDb, addUserDb, editUsersDb,deleteUserDb,recentUsersDb} from "../model/userDb.js";
-
+import {hash} from 'bcrypt'
 
 const fetchUsers = async (req,res)=>{
     res.json(await getUsersDb())
@@ -14,17 +14,22 @@ const fetchRecentUser = async (req,res)=>{
 }
 
 const addUser = async (req,res)=>{
-    let {firstName,lastName,userAge,gender,userRole,emailAdd,userPass,userProfile} = req.body
-    await addProductDb(firstName,lastName,userAge,gender,userRole,emailAdd,userPass,userProfile)
+    let {firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile} = req.body
+    hash(userPass,10,async (err,hashedP)=>{
+        if(err){
+            console.log(hashedP)
+        }    
+        await addUserDb(firstName,lastName,userAge,Gender,userRole,emailAdd,hashedP,userProfile)
+    })
+    res.json({message:"User created successfully"})
 }
 
 const removeUser = async (req,res)=>{
     await deleteUserDb(req.params.id)
 }
 
-
 const updateUser = async (req,res)=>{
-    let {firstName,lastName,userAge,gender,userRole,emailAdd,userPass,userProfile} = req.body
+    let {firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile} = req.body
     let user = await getUserDb(req.params.id)
 
     firstName? firstName=firstName : firstName = user.firstName
@@ -35,7 +40,15 @@ const updateUser = async (req,res)=>{
     emailAdd? emailAdd=emailAdd : emailAdd = user.emailAdd
     userPass? userPass=userPass : userPass = user.userPass
     userProfile? userProfile=userProfile : userProfile = user.userProfile
-
-    res.json(await editProductsDb(req.params.id,firstName,lastName,userAge,gender,userRole,emailAdd,userPass,userProfile))
+    console.log(user)
+    res.json(await editUsersDb(req.params.id,firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile))
 }
-export {fetchUsers, fetchUser, fetchRecentUser, addUser, removeUser, updateUser}
+
+
+const loginUser = (req,res)=>{
+    res.json({
+        message:"User logged in successfully",
+        tokem:req.body.token
+    })
+}
+export {fetchUsers, fetchUser, fetchRecentUser, addUser, removeUser, updateUser, loginUser}
