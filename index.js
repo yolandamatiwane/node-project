@@ -9,7 +9,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use(express.static('public'))
-app.use('/',productRouter)
+app.use('/products',productRouter)
 
 app.listen(port,()=>{
     console.log('http://localhost:'+port)

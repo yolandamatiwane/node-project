@@ -27,8 +27,19 @@ const deleteProductDb = async (id)=>{
 }
 
 const recentProductsDb = async()=>{
-    let [data] = await pool.query('SELECT * FROM products ORDER BY prodID DESC LIMIT 5')
+    let [data] = await pool.query(`
+    SELECT *
+    FROM products
+    ORDER BY prodID desc`)
     return data
 }
 
-export {getProductsDb, getProductDb, addProductDb, deleteProductDb, recentProductsDb}
+const editProductsDb = async (id,prodName,quantity,amount,category,prodUrl,prodDesc)=>{
+    let [data] = await pool.query(`
+        UPDATE products
+        SET prodName = ?,quantity =? ,amount=?,category=?,prodUrl=?,prodDesc=?
+        WHERE prodID = ?`,[prodName,quantity,amount,category,prodUrl,prodDesc,id])
+    return data
+}
+
+export {getProductsDb, getProductDb, addProductDb, deleteProductDb, recentProductsDb, editProductsDb}
