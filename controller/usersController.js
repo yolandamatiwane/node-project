@@ -1,3 +1,4 @@
+import { log } from "console";
 import { getUsersDb, getUserDb, addUserDb, editUsersDb,deleteUserDb,recentUsersDb, getLoginDb} from "../model/userDb.js";
 import {hash} from 'bcrypt'
 
@@ -70,7 +71,8 @@ const removeUser = async (req,res)=>{
 
 const updateUser = async (req,res)=>{
     let {firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile} = req.body
-
+    console.log(req.body);
+    
     try{
         let user = await getUserDb(req.params.id)
 
@@ -82,18 +84,21 @@ const updateUser = async (req,res)=>{
         emailAdd? emailAdd=emailAdd : emailAdd = user.emailAdd
         userProfile? userProfile=userProfile : userProfile = user.userProfile
         console.log(user)
-        if(userPass!=''){
+        if(userPass){
             hash(userPass,10,async (err,hashedP)=>{
                 if(err){
                     console.log(hashedP)
                 }    
                 userPass = hashedP
+                console.log(userPass);
+                
                 await editUsersDb(req.params.id,firstName,lastName,userAge,Gender,userRole,emailAdd,hashedP,userProfile)
             })
-
+            
         }else{
             userPass = user.userPass
-            res.json(await editUsersDb(req.params.id,firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile))
+            console.log(userPass);
+            await editUsersDb(req.params.id,firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile)
         }
         res.json({message:"User updated successfully"})
     }catch(err){
