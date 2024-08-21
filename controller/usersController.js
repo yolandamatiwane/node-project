@@ -5,7 +5,7 @@ const fetchUsers = async (req,res)=>{
     try{
         res.json(await getUsersDb())
     } catch(err){
-        res.json({message:"There is an issue with fetching users"})
+        res.json({err:"There is an issue with fetching users"})
         throw err
     }
 }
@@ -14,7 +14,7 @@ const fetchUser = async (req,res)=>{
     try{
         res.json(await getUserDb(req.params.id))
     } catch(err){
-        res.json({message:"There is an issue with fetching single user information"})
+        res.json({err:"There is an issue with fetching single user information"})
         throw err
     }
 }
@@ -23,7 +23,7 @@ const fetchRecentUser = async (req,res)=>{
     try{
         res.json(await recentUsersDb())
     } catch(err){
-        res.json({message:"There has been an issue with fetching the recent user"})
+        res.json({err:"There has been an issue with fetching the recent user"})
         throw err
     }
 }
@@ -53,7 +53,7 @@ const addUser = async (req,res)=>{
             
         }
     } catch(err){
-        res.json({message:"There is an issue with creating a new user"})
+        res.json({err:"There is an issue with creating a new user"})
         throw err
     }
 }
@@ -63,7 +63,7 @@ const removeUser = async (req,res)=>{
         await deleteUserDb(req.params.id)
         res.json({message:"User deleted successfully"})
     } catch(err){
-        res.json({message:"There is an issue with deleting a user"})
+        res.json({err:"There is an issue with deleting a user"})
         throw err
     }
 }
@@ -97,7 +97,7 @@ const updateUser = async (req,res)=>{
         }
         res.json({message:"User updated successfully"})
     }catch(err){
-        res.json({message:"There is an issue with updating the user"})    
+        res.json({err:"There is an issue with updating the user"})    
         throw err
     }
 }
@@ -110,7 +110,7 @@ const loginUser = (req,res)=>{
             token:req.body.token
         })
     } catch(err){
-        res.json({message:"There is an issue with logging in the user"})
+        res.json({err:"There is an issue with logging in the user"})
     }
 }
 export {fetchUsers, fetchUser, fetchRecentUser, addUser, removeUser, updateUser, loginUser}
