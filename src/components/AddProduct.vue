@@ -3,13 +3,13 @@
       type="button"
       class="btn"
       data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
+      data-bs-target="#exampleModal1"
     >
       Add Product
     </button>
     <div
       class="modal fade"
-      id="exampleModal"
+      id="exampleModal1"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -27,14 +27,14 @@
           </div>
           <div class="modal-body">
             <form>
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <input
                   type="text"
                   class="form-control w-50 mx-auto"
                   placeholder="Product ID"
                   v-model="payload.prodID"
                 />
-              </div>
+              </div> -->
               <div class="mb-3">
                 <input
                   type="text"
@@ -64,7 +64,7 @@
                   type="text"
                   class="form-control w-50 mx-auto"
                   placeholder="Product Category"
-                  v-model="payload.Category"
+                  v-model="payload.category"
                 />
               </div>
               <div class="mb-3">
@@ -72,7 +72,7 @@
                   type="text"
                   class="form-control w-50 mx-auto"
                   placeholder="Product URL"
-                  v-model="payload.prodURL"
+                  v-model="payload.prodUrl"
                 />
               </div>
               <div class="mb-3">
@@ -113,12 +113,12 @@
     data() {
       return {
         payload: {
-          prodID: null,
+        //   prodID: null,
           prodName: "",
-          quantity: null,
-          amount: null,
-          Category: "",
-          prodURL: "",
+          quantity: "",
+          amount: "",
+          category: "",
+          prodUrl: "",
           prodDesc: "",
         },
       };
@@ -126,7 +126,7 @@
     methods: {
       addingProduct() {
         try {
-          this.$store.dispatch("addProduct", this.payload);
+          this.$store.dispatch("addProduct", this.payload)
         } catch (error) {
           console.error(error);
         }

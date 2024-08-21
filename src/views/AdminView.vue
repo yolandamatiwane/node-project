@@ -35,7 +35,7 @@
     <td><img :src="user.userProfile" alt="" style="width: 35px;" loading="lazy"></td>
     <td class="d-flex justify-content-between">
       <updateUser :user="user" />
-      <button class="btn btn-success deleteButton" @click="event => deleteUser(user.userID)">Delete</button>
+      <button class="btn btn-success deleteButton" @click.prevent="deleteUser(user.userID)">Delete</button>
     </td>
   </tr>
 </tbody>
@@ -96,6 +96,7 @@ import addUser from '@/components/AddUser.vue';
     computed: {
       products(){
         return this.$store.state.products
+        
     },
       users(){
         return this.$store.state.users
@@ -107,16 +108,16 @@ import addUser from '@/components/AddUser.vue';
 }, 
 methods: {
   deleteUser(userID) {
-    this.$store.dispatch('deleteUser', {id: userID});
+    this.$store.dispatch('deleteUser', userID);
   },
   deleteProduct(prodID) {
-    this.$store.dispatch('deleteProduct', {id: prodID});
+    this.$store.dispatch('deleteProduct', prodID);
   },
   updateUser(user) {
     let editUser = {userID: user.userID, firstName: user.firstName, lastName: user.lastName, userAge: user.userAge, Gender: user.Gender, userRole: user.userRole, emailAdd: user.emailAdd, userPass: user.userPass, userProfile: user.userProfile}
-  this.$store.dispatch('updateUser', {id: user.userID, data: editUser})
+  this.$store.dispatch('updateUser', editUser)
   },
-  updateProduct(product) {
+  updateProduct(prodID) {
     let editProduct = {productID: product.prodID, productName: product.prodName, quantity: product.quantity, amount: product.amount, Category: product.Category, prodURL: product.prodURL, prodDesc: product.prodDesc}
   this.$store.dispatch('updateProduct', {id: product.prodID, data: editProduct})
 }}

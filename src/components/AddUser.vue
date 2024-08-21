@@ -27,14 +27,14 @@
           </div>
           <div class="modal-body">
             <form>
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <input
                   type="text"
                   class="form-control w-50 mx-auto"
                   placeholder="user ID"
                   v-model="payload.userID"
                 />
-              </div>
+              </div> -->
               <div class="mb-3">
                 <input
                   type="text"
@@ -129,15 +129,15 @@
     data() {
       return {
         payload: {
-          userID: null,
+        //   userID: null,
           firstName: "",
           lastName: "",
-          userAge: null,
+          userAge: "",
           Gender: "",
           userRole: "",
           emailAdd: "",
           userPass: "",
-          userProfile: "",
+          userProfile: "https://codjoelmayer.github.io/projectImages/images/profile-Image.png",
         },
       };
     },
@@ -145,6 +145,7 @@
       addingUser() {
         try {
           this.$store.dispatch("register", this.payload);
+          location.reload()
         } catch (error) {
           console.error(error);
         }

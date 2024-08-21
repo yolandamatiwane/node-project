@@ -37,7 +37,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Update</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" @click="updateProduct()">Update</button>
               </div>
             </form>
           </div>
@@ -52,19 +52,19 @@
     data() {
       return {
         payload: {
-          prodID: '',
-          prodName: '',
-          quantity: '',
-          amount: '',
-          category: '',
-          prodUrl: '',
-          prodDesc: ''
+          prodID: undefined,
+          prodName: undefined,
+          quantity: undefined,
+          amount: undefined,
+          category: undefined,
+          prodUrl: undefined,
+          prodDesc: undefined
         }
       }
     },
     methods: {
-      updateProduct() {
-        this.$store.dispatch('updateProduct', {id: this.payload.prodID, data: this.payload});
+      async updateProduct() {
+        await this.$store.dispatch('updateProduct', this.payload);
         window.location.reload()
       }
     }
