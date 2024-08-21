@@ -3,27 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>eStore API</title>
 </head>
 <body>
-    <table border="1">
-        <tr>USERS</tr>
+    
+    <h3>USERS:</h3>
+    <table>
         <tr>
             <th>HTTP Methods</th>
             <th>Path</th>
             <th>Description</th>
         </tr>
         <tr>
-            
+            <td>GET</td>
+            <td>/users</td>
+            <td>Fetches all users' data</td>
         </tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
+        <tr>
+            <td>GET</td>
+            <td>/users/:id</td>
+            <td>Fetches single user's data</td>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/users/register</td>
+            <td>Adds/registers user to database</td>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/users/login</td>
+            <td>Logs in user and returns token</td>
+        </tr>
+        <tr>
+            <td>PATCH</td>
+            <td>/users/update/:id</td>
+            <td>Updates user information</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/users/delete/:id</td>
+            <td>Deletes user data</td>
+        </tr>
 
     </table>
 
-    <table border="1">
-        <tr>PRODUCTS</tr>
+    <h3>PRODUCTS:</h3>
+    <table>
         <tr>
             <th>HTTP Methods</th>
             <th>Path</th>
@@ -41,7 +67,7 @@
         </tr>
         <tr>
             <td>GET</td>
-            <td>/products/recent</td>
+            <td>/products/product/recent</td>
             <td>Returns most recent products</td>
         </tr>
         <tr>

@@ -9,9 +9,9 @@ router.post('/login',checkUser,loginUser)
 router.get('/',fetchUsers)
 router.get('/recent',fetchRecentUser)
 router.get('/:id',fetchUser)
-router.post('/addUser',addUser)
-router.delete('/removeUser/:id',removeUser)
-router.patch('/updateUser/:id',updateUser)
+router.post('/register',addUser)
+router.delete('/delete/:id',removeUser)
+router.patch('/update/:id',updateUser)
 
 
 
