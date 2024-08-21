@@ -7,6 +7,8 @@ import { applyToken } from '@/service/AuthenticatedUser.js'
 import { useCookies } from 'vue3-cookies'
 const { cookies } = useCookies()
 const apiURL = 'https://node-project-iwzw.onrender.com/'
+/*eslint-disable */
+
 // Should you reload the page after logging in
 applyToken(cookies.get('LegitUser')?.token)
 export default createStore({
@@ -77,7 +79,10 @@ export default createStore({
     },
     async register(context, payload) {
       try {
-        const { msg, err, token } = await (await axios.post(`${apiURL}users/register`, payload)).data
+        const { message, err, token } = await (await axios.post(`${apiURL}users/register`, payload)).data
+      // const data = await (await axios.post(`${apiURL}users/register`, payload)).data
+      // console.log(data)
+
         if (token) {
           context.dispatch('fetchUsers')
           toast.success(`${msg}`, {
@@ -99,9 +104,11 @@ export default createStore({
       }
     },
     async updateUser(context, payload) {
+      console.log(payload);
+      
       try {
-        const { msg, err } = await (await axios.patch(`${apiURL}users/${payload.userID}`, payload)).data
-        if (msg) {
+        const { message, err } = await (await axios.patch(`${apiURL}users/update/${payload.userID}`, payload)).data
+        if (message) {
           context.dispatch('fetchUsers')
         } else {
           toast.error(`${err}`, {
@@ -118,7 +125,7 @@ export default createStore({
     },
     async deleteUser(context, id) {
       try {
-        const { message, err } = await (await axios.delete(`${apiURL}users/${id}`)).data
+        const { message, err } = await (await axios.delete(`${apiURL}users/delete/${id}`)).data
         if (message) {
           context.dispatch('fetchUsers')
         } else {
@@ -222,9 +229,9 @@ export default createStore({
         })
       }
     },
-    async addAProduct(context, payload) {
+    async addProduct(context, payload) {
       try {
-        const { message } = await (await axios.post(`${apiURL}product/add`, payload)).data
+        const {message,err} = await (await axios.post(`${apiURL}products/addProduct`, payload)).data
         if (message) {
           context.dispatch('fetchProducts')
           toast.success(`${message}`, {
@@ -232,7 +239,8 @@ export default createStore({
             position: toast.POSITION.BOTTOM_CENTER
           })
         }
-      } catch (e) {
+      } 
+      catch (err) {
         toast.error(`${e.message}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
@@ -241,7 +249,7 @@ export default createStore({
     },
     async updateProduct(context, payload) {
       try {
-        const { message } = await (await axios.patch(`${apiURL}product/${payload.productID}`, payload)).data
+        const { message } = await (await axios.patch(`${apiURL}products/update/${payload.productID}`, payload)).data
         if (message) {
           context.dispatch('fetchProducts')
           toast.success(`${message}`, {

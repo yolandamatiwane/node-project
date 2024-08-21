@@ -42,7 +42,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Update</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" @click="updateUser()">Update</button>
               </div>
             </form>
           </div>
@@ -57,21 +57,22 @@
     data() {
       return {
         payload: {
-          userID: '',
-          firstName: '',
-          lastName: '',
-          userAge: '',
-          Gender: '',
-          userRole: '',
-          emailAdd: '',
-          userPass: '',
-          userProfile: ''
+          
+          firstName: undefined,
+          lastName: undefined,
+          userAge: undefined,
+          Gender: undefined,
+          userRole: undefined,
+          emailAdd: undefined,
+          userPass: undefined,
+          userProfile: undefined,
+          userID: undefined
         }
       }
     },
     methods: {
-      updateUser() {
-        this.$store.dispatch('updateUser', {id: this.payload.userID, data: this.payload});
+      async updateUser() {
+        await this.$store.dispatch('updateUser', this.payload);
         window.location.reload()
       }
     }
