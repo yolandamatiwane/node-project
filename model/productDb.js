@@ -6,7 +6,7 @@ const getProductsDb = async ()=>{
 }
 
 const getProductDb = async (id)=>{
-    let [[data]] = await pool.query(`
+    let [data] = await pool.query(`
         SELECT *
         FROM Products
         WHERE prodID =? `,[id])
