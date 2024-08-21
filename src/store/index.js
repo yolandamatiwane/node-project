@@ -41,7 +41,7 @@ export default createStore({
     // ==== User ========
     async fetchUsers(context) {
       try {
-        const { results, msg } = await (await axios.get(`${apiURL}user`)).data
+        const results = await (await axios.get(`${apiURL}users`)).data
         if (results) {
           context.commit('setUsers', results)
         } else {
@@ -59,7 +59,7 @@ export default createStore({
     },
     async fetchUser(context, id) {
       try {
-        const { result, msg } = await (await axios.get(`${apiURL}user/${id}`)).data
+        const { result, msg } = await (await axios.get(`${apiURL}users/${id}`)).data
         if (result) {
           context.commit('setUser', result)
         } else {
@@ -77,7 +77,7 @@ export default createStore({
     },
     async register(context, payload) {
       try {
-        const { msg, err, token } = await (await axios.post(`${apiURL}user/register`, payload)).data
+        const { msg, err, token } = await (await axios.post(`${apiURL}users/register`, payload)).data
         if (token) {
           context.dispatch('fetchUsers')
           toast.success(`${msg}`, {
@@ -100,7 +100,7 @@ export default createStore({
     },
     async updateUser(context, payload) {
       try {
-        const { msg, err } = await (await axios.patch(`${apiURL}user/${payload.userID}`, payload)).data
+        const { msg, err } = await (await axios.patch(`${apiURL}users/${payload.userID}`, payload)).data
         if (msg) {
           context.dispatch('fetchUsers')
         } else {
@@ -118,8 +118,8 @@ export default createStore({
     },
     async deleteUser(context, id) {
       try {
-        const { msg, err } = await (await axios.delete(`${apiURL}user/${id}`)).data
-        if (msg) {
+        const { message, err } = await (await axios.delete(`${apiURL}users/${id}`)).data
+        if (message) {
           context.dispatch('fetchUsers')
         } else {
           toast.error(`${err}`, {
@@ -137,22 +137,22 @@ export default createStore({
     // ===== LOGIN =======
     async login(context, payload) {
       try {
-        const { msg, result, token } = await (await axios.post(`${apiURL}user/login`, payload)).data
+        const { message, token } = await (await axios.post(`${apiURL}users/login`, payload)).data
 
-        if (result) {
-          toast.success(`${msg}😎`, {
+        if (token) {
+          toast.success(`${message}😎`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
           context.commit('setUser', {
-            msg,
-            result
+            message,
+            token
           })
-          cookies.set('LegitUser', { token, msg, result })
+          cookies.set('LegitUser', { token, message, result })
           applyToken(token)
           router.push({ name: 'products' })
         } else {
-          toast.error(`${msg}`, {
+          toast.error(`${message}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
@@ -186,11 +186,11 @@ export default createStore({
     },
     async recentProducts(context) {
       try {
-        const { results, msg } = await (await axios.get(`${apiURL}products/recent`)).data
+        const { results, message } = await (await axios.get(`${apiURL}products/recent`)).data
         if (results) {
           context.commit('setRecentProducts', results)
         } else {
-          toast.error(`${msg}`, {
+          toast.error(`${message}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
@@ -205,13 +205,15 @@ export default createStore({
     async fetchProduct(context, id) {
       try {
         const [result]= await (await axios.get(`${apiURL}products/${id}`)).data
+        console.log(result);
         if (result) {
           context.commit('setProduct', result)
         } else {
-          toast.error(`${msg}`, {
+          toast.error(`${message}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
+
         }
       } catch (e) {
         toast.error(`${e.message}`, {
@@ -222,10 +224,10 @@ export default createStore({
     },
     async addAProduct(context, payload) {
       try {
-        const { msg } = await (await axios.post(`${apiURL}product/add`, payload)).data
-        if (msg) {
+        const { message } = await (await axios.post(`${apiURL}product/add`, payload)).data
+        if (message) {
           context.dispatch('fetchProducts')
-          toast.success(`${msg}`, {
+          toast.success(`${message}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
@@ -239,10 +241,10 @@ export default createStore({
     },
     async updateProduct(context, payload) {
       try {
-        const { msg } = await (await axios.patch(`${apiURL}product/${payload.productID}`, payload)).data
-        if (msg) {
+        const { message } = await (await axios.patch(`${apiURL}product/${payload.productID}`, payload)).data
+        if (message) {
           context.dispatch('fetchProducts')
-          toast.success(`${msg}`, {
+          toast.success(`${message}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
@@ -256,10 +258,10 @@ export default createStore({
     },
     async deleteProduct(context, id) {
       try {
-        const { msg } = await (await axios.delete(`${apiURL}product/${id}`)).data
-        if (msg) {
+        const { message } = await (await axios.delete(`${apiURL}product/${id}`)).data
+        if (message) {
           context.dispatch('fetchProducts')
-          toast.success(`${msg}`, {
+          toast.success(`${message}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })

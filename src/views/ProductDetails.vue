@@ -17,7 +17,7 @@
                 </template>
             </Card>
         </div>
-        <div v-else> 
+        <div v-if="!product"> 
             <Spinner/>
         </div>
     </div>

@@ -16,7 +16,6 @@
                             <button class="btn btn-success"> 
                                 View</button>
                         </router-link>
-                        <button class="btn btn-dark">Cart</button>
                     </div>
                 </template>
             </Card>
