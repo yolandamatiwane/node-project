@@ -13,11 +13,11 @@ const getUserDb = async (id)=>{
     return data
 }
 const getLoginDb = async (emailAdd)=>{
-    let [data] = await pool.query(`
+    let [[data]] = await pool.query(`
         SELECT *
         FROM Users
         WHERE emailAdd =? `,[emailAdd])
-    return data
+    return data?data:''
 }
 
 const addUserDb = async(firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile)=>{

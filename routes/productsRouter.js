@@ -5,10 +5,10 @@ import { fetchProducts, fetchProduct, addProduct, removeProduct, fetchRecentProd
 const router = express.Router()
 
 router.get('/',fetchProducts)
+router.get('/recent', fetchRecentProducts)
 router.get('/:id',fetchProduct)
 router.post('/addProduct',addProduct)
 router.delete('/delete/:id',removeProduct)
-router.get('product/recent', fetchRecentProducts)
 router.patch('/update/:id',updateProducts)
 
 export default router 

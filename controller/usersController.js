@@ -1,11 +1,11 @@
-import { getUsersDb, getUserDb, addUserDb, editUsersDb,deleteUserDb,recentUsersDb} from "../model/userDb.js";
+import { getUsersDb, getUserDb, addUserDb, editUsersDb,deleteUserDb,recentUsersDb, getLoginDb} from "../model/userDb.js";
 import {hash} from 'bcrypt'
 
 const fetchUsers = async (req,res)=>{
     try{
         res.json(await getUsersDb())
     } catch(err){
-        res.send("There is an issue with fetching users")
+        res.json({message:"There is an issue with fetching users"})
         throw err
     }
 }
@@ -14,7 +14,7 @@ const fetchUser = async (req,res)=>{
     try{
         res.json(await getUserDb(req.params.id))
     } catch(err){
-        res.send("There is an issue with fetching single user information")
+        res.json({message:"There is an issue with fetching single user information"})
         throw err
     }
 }
@@ -23,7 +23,7 @@ const fetchRecentUser = async (req,res)=>{
     try{
         res.json(await recentUsersDb())
     } catch(err){
-        res.send("There has been an issue with fetching the recent user")
+        res.json({message:"There has been an issue with fetching the recent user"})
         throw err
     }
 }
@@ -35,7 +35,13 @@ const addUser = async (req,res)=>{
         if (!firstName || !lastName || !userAge || !Gender || !emailAdd || !userPass) {
             return res.status(400).json({message:"Missing required fields" });
         }
-        else{
+        else {
+            let oldEmailAdd = (await getLoginDb(emailAdd)).emailAdd
+            
+            if(emailAdd == oldEmailAdd){
+                return res.status(400).json({message:"Email already exists" });
+            }
+
             hash(userPass,10,async (err,hashedP)=>{
                 if(err){
                     console.log(err)
@@ -43,6 +49,8 @@ const addUser = async (req,res)=>{
                 await addUserDb(firstName,lastName,userAge,Gender,userRole,emailAdd,hashedP,userProfile)
             })
             res.json({message:"User created successfully"})
+
+            
         }
     } catch(err){
         res.json({message:"There is an issue with creating a new user"})
@@ -53,6 +61,7 @@ const addUser = async (req,res)=>{
 const removeUser = async (req,res)=>{
     try{
         await deleteUserDb(req.params.id)
+        res.json({message:"User deleted successfully"})
     } catch(err){
         res.json({message:"There is an issue with deleting a user"})
         throw err
@@ -86,6 +95,7 @@ const updateUser = async (req,res)=>{
             userPass = user.userPass
             res.json(await editUsersDb(req.params.id,firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile))
         }
+        res.json({message:"User updated successfully"})
     }catch(err){
         res.json({message:"There is an issue with updating the user"})    
         throw err

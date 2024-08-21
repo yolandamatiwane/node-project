@@ -15,7 +15,7 @@ const fetchProduct = async (req,res)=>{
     try{
         res.json(await getProductDb(req.params.id))
     }catch(err){
-        res.send('There was an issue with fetching single Product')
+        res.json({message:'There was an issue with fetching single Product'})
         throw err
     }
 }
@@ -24,7 +24,7 @@ const fetchRecentProducts = async (req,res)=>{
     try{
     res.json(await recentProductsDb())
     }catch(err){
-        res.send('There was an issue with fetching Recent Products')
+        res.json({message:'There was an issue with fetching Recent Products'})
         throw err
     }
 }
@@ -34,6 +34,7 @@ const addProduct = async (req,res)=>{
     let {prodName,quantity,amount,category,prodUrl,prodDesc} = req.body
     try{
         await addProductDb(prodName,quantity,amount,category,prodUrl,prodDesc)
+        res.json({message: 'Product Added Successfully'})
     }catch(err){
         res.send('There was an issue with adding Product')
         throw err
@@ -43,8 +44,9 @@ const addProduct = async (req,res)=>{
 const removeProduct = async (req,res)=>{
     try{
         await deleteProductDb(req.params.id)
+        res.json({message:'Product has been deleted'})
     } catch(err){
-        res.send('There was an issue with removing Product')
+        res.json({message:'There was an issue with removing Product'})
         throw err
     }
 }

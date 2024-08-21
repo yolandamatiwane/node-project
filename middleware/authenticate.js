@@ -9,7 +9,7 @@ const checkUser = async (req,res,next)=>{
     if (!emailAdd || !userPass) {
         return res.status(400).send( "Missing required fields" );
     }
-    let [data]  = (await getLoginDb(emailAdd))
+    let data  = (await getLoginDb(emailAdd))
     let hashedPassword = data.userPass
     console.log(data);
     
