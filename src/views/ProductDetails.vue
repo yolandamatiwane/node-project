@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <h2 class="display-2">Product Details</h2>
+            <h3 class="display-2">Product Details</h3>
         </div>
         <div class="row justify-content-center" v-if="product">
             <Card>
@@ -13,7 +13,7 @@
                     <p class="lead">
                         {{ product.prodDesc }}
                     </p>
-                    <p class="lead"><span class="text-success fw-bold">Amount</span>: R{{ product.amount }}</p>
+                    <p class="lead"><span class="lead1 fw-bold">Amount</span>: R{{ product.amount }}</p>
                 </template>
             </Card>
         </div>
@@ -39,4 +39,15 @@ onMounted(() => {
 }) 
 </script>
 
-<style scoped></style>
+<style scoped>
+h3{
+    font-weight: bold;
+    font-size: 30px;
+    color: orange; /* Dark teal blue */
+    text-shadow: black; /* Matching shadow for consistency */
+}
+.lead1{
+    color: #162052;
+}
+
+</style>

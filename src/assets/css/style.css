@@ -5,6 +5,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Merriweather', serif;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
 }
 body{
     background-color: #a9a9a92b;
@@ -25,4 +27,11 @@ body{
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+}
+
+h3{
+    font-weight: bold;
+    font-size: 60px;
+    color: #445216; /* Dark teal blue */
+    text-shadow: black; /* Matching shadow for consistency */
 }

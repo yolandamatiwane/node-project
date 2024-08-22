@@ -31,16 +31,19 @@ export default {
 <style>
 #about {
     margin-top: 30px;
-    background: linear-gradient(to right, #e0f7fa, #b2ebf2); /* Light blue gradient background */
+    /* background: linear-gradient(to right, #e0f7fa, #b2ebf2);  */
     padding: 20px;
     border-radius: 10px;
 }
-
-#about h3 {
+h3{
     font-weight: bold;
-    color: #004d40; /* Dark teal blue */
-    text-shadow: 0px 1px 1px #004d40; /* Matching shadow for consistency */
+    font-size: 30px;
+    color: orange; /* Dark teal blue */
+    text-shadow: black; /* Matching shadow for consistency */
 }
+
+
+
 
 #about hr {
     border: 0;
@@ -50,16 +53,21 @@ export default {
 }
 
 #about p {
-    color: #01579b; /* Darker blue for better readability */
+    color: black; /* Darker blue for better readability */
 }
 
 #about button {
     width: 150px;
     height: 36px;
     color: white;
-    background-color: #fbc02d; /* Yellow background for button */
+    background-color: orange; /* Yellow background for button */
     border-radius: 5px;
     cursor: pointer;
+    border: none;
+}
+#about button:hover{
+    background-color: #162052;
+    color: orange;
     border: none;
 }
 

@@ -1,7 +1,7 @@
 <template>
     <button
       type="button"
-      class="btn"
+      class="btn16"
       data-bs-toggle="modal"
       data-bs-target="#exampleModal"
     >
@@ -17,7 +17,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add User</h1>
             <button
               type="button"
               class="btn-close"
@@ -154,4 +154,14 @@
   };
   </script>
   
-  <style scoped></style>
+  <style scoped>
+.btn16{
+  background-color:#162052 ;
+  color: orange;
+  border-radius: 10%;
+}
+.btn16:hover{
+  background-color:orange ;
+  color: #162052;
+}
+</style>
