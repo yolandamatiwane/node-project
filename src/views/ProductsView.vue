@@ -1,24 +1,26 @@
 <template>
     <div class="container">
-        <div class="row">
-            <h2 class="display-2">Products</h2>
-            <select class="btn btn-outline-dark" v-model="selectedCategory">
+        <div class="row justify-content-center">
+            <h3 class="display-2">Products</h3>
+            <select class="btn catBtn" v-model="selectedCategory">
                 <option value="">All Categories</option>
                 <option value="Cooking Appliances">Cooking Appliances</option>
                 <option value="Food Preparation Appliances">Food Preparation Appliances</option>
                 <option value="Food storage">Food Storage</option>
                 <option value="Beverage Appliances">Beverage Appliances</option>
             </select>
-             <div class="options row mb-4">
-          <div class="col-md-6">
-            <div class="search">
-              <input type="text" v-model="search" class="form-control" placeholder="Search" />
-              <button @click="searching">search</button>
-            </div>
+             <div class="options row mb-4 my-3 justify-content-center">
+                <div class="row">
+                    <div class="col-10">
+                        <input type="text" v-model="search" class="form-control" placeholder="Search" />
+                    </div>
+                    <!-- <div class="col-2">
+                        <button class="btn" @click="searching">search</button>
+                    </div> -->
           </div>
           {{ console.log(this.search) }}
-          <div class="btn-group">
-          <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+          <div class="my-3">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false">
             Sort by price
           </button>
@@ -26,17 +28,15 @@
             <li><a class="dropdown-item" @click="sortByPriceAsc">Ascending</a></li>
             <li><a class="dropdown-item" @click="sortByPriceDesc">Descending</a></li>
           </ul>
-        </div>
-          <div class="btn-group">
-          <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false">
             Sort by Name
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" @click="sortByNameAsc">Ascending</a></li>
-            <li><a class="dropdown-item" @click="sortByNameDesc">Descending</a></li>
-          </ul>
         </div>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" @click="sortByNameAsc">Ascending</a></li>
+          <li><a class="dropdown-item" @click="sortByNameDesc">Descending</a></li>
+        </ul>
         </div>
         </div>
         <div class="row gap-2 justify-content-center my-2" v-if="filterProducts">
@@ -46,10 +46,10 @@
                 </template>
                 <template #cardBody>
                     <h5 class="card-title fw-bold">{{ product.prodName }}</h5>
-                    <p class="lead"><span class="text-success fw-bold">Amount</span>: R{{ product.amount }}</p>
+                    <p class="lead"><span class="amount fw-bold">Amount:</span> R{{ product.amount }}</p>
                     <div class="button-wrapper d-md-flex d-block justify-content-between">
                         <router-link :to="{ name: 'product', params: { id: product.prodID } }">
-                            <button class="btn btn-success"> 
+                            <button class="btn"> 
                                 View</button>
                         </router-link>
                     </div>
@@ -128,5 +128,27 @@ export default{
 </script>
 
 <style scoped>
+h3{
+    font-weight: bold;
+    font-size: 30px;
+    color: orange; /* Dark teal blue */
+    text-shadow: black; /* Matching shadow for consistency */
+}
 
+
+.btn-group{
+    max-width: 300px;
+}
+
+.catBtn{
+    width: 30%;
+}
+
+.btn{
+    background-color: #162052;
+    color: orange;
+}
+.amount{
+    color: orange;
+}
 </style>

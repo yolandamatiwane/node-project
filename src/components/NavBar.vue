@@ -66,6 +66,7 @@ export default {
     transition: 0.5s ease;
 }
 .nav-item .nav-link:hover{
-    color: blue;
+    color: white;
 }
+
 </style>

@@ -128,7 +128,7 @@
 }
 .btn button:hover{
     background-color: #162052;
-    color: black;
+    color: orange;
     border: none;
 }
 @media screen and (max-width:1200px){
