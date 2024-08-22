@@ -67,7 +67,7 @@
         <td>{{ product.quantity }}</td>
         <td>R {{ product.amount }}</td>
         <td>{{ product.category }}</td>
-        <td><img :src="product.prodUrl" loading="lazy" class="img-fluid" style="width: 60px;" :alt="product.prodName"></td>
+        <td><img :src="product.prodUrl" loading="lazy" class="img-fluid" style="width: 35px;" :alt="product.prodName"></td>
         <td>{{ product.prodDesc }}</td>
         <td class="d-flex justify-content-between">
             <updateProduct :product="product" />
@@ -117,9 +117,9 @@ methods: {
     let editUser = {userID: user.userID, firstName: user.firstName, lastName: user.lastName, userAge: user.userAge, Gender: user.Gender, userRole: user.userRole, emailAdd: user.emailAdd, userPass: user.userPass, userProfile: user.userProfile}
   this.$store.dispatch('updateUser', editUser)
   },
-  updateProduct(prodID) {
-    let editProduct = {productID: product.prodID, productName: product.prodName, quantity: product.quantity, amount: product.amount, Category: product.Category, prodURL: product.prodURL, prodDesc: product.prodDesc}
-  this.$store.dispatch('updateProduct', {id: product.prodID, data: editProduct})
+  updateProduct(payload) {
+    //let editProduct = {productID: product.prodID, productName: product.prodName, quantity: product.quantity, amount: product.amount, Category: product.Category, prodURL: product.prodURL, prodDesc: product.prodDesc}
+  this.$store.dispatch('updateProduct', payload)
 }}
 }
 </script>
@@ -147,4 +147,58 @@ background-color: #1d3557;
 color: #fff;
 transition: 1s;
 } */
+h2 {
+    color: #003366; /* Dark Blue for headings */
+    font-weight: bold;
+    border-bottom: 2px solid #003366; /* Underline with matching color */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+.table {
+    background-color: #ffffff; /* White background for the table */
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden;
+}
+
+.table-dark {
+    background-color: #003366; /* Dark Blue for table headers */
+    color: #ffffff; /* White text for contrast */
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn-success {
+    background-color: #28a745; /* Green for success buttons */
+    border: none;
+    color: #ffffff;
+}
+
+.deleteButton {
+    background-color: #dc3545; /* Red for delete buttons */
+    border: none;
+    color: #ffffff;
+}
+
+.btn-success:hover, .deleteButton:hover {
+    opacity: 0.9; /* Slightly reduce opacity on hover */
+}
+
+/* Image Styles */
+.table img {
+    border-radius: 5px; /* Rounded corners for images */
+}
+
+/* Responsive Container */
+.container {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light grey background for container */
+    border-radius: 10px;
+}
 </style>

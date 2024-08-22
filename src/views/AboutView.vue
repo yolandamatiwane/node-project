@@ -15,7 +15,7 @@
                 <hr>
                 <p>At KyYola, we pride ourselves on delivering state-of-the-art electronic appliances that seamlessly integrate into your daily life. Founded on a passion for innovation and quality, we strive to enhance your home experience with products that offer both cutting-edge technology and exceptional reliability. Our dedicated team works tirelessly to bring you the best in modern appliances, ensuring that each item we offer meets our high standards of performance and design. At KyYola, we’re not just selling appliances; we’re shaping the future of home living.</p>
                 <hr>
-                <button class="btn btn-primary">View Products</button>
+                <router-link class="nav-link" to="/products"><button class="btn btn-primary">View Products</button></router-link>
             </div>
         </div>
     </div>
@@ -29,20 +29,52 @@ export default {
 </script>
 
 <style>
-#about{
+#about {
     margin-top: 30px;
+    background: linear-gradient(to right, #e0f7fa, #b2ebf2); /* Light blue gradient background */
+    padding: 20px;
+    border-radius: 10px;
 }
-#about h3{
+
+#about h3 {
     font-weight: bold;
-    color: orange;
-    text-shadow: 0px 1px 1px black;
+    color: #004d40; /* Dark teal blue */
+    text-shadow: 0px 1px 1px #004d40; /* Matching shadow for consistency */
 }
-#about button{
+
+#about hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, #fbc02d, #ffeb3b); /* Gradient yellow for hr */
+    margin: 20px 0;
+}
+
+#about p {
+    color: #01579b; /* Darker blue for better readability */
+}
+
+#about button {
     width: 150px;
     height: 36px;
     color: white;
-    background-color: orange;
+    background-color: #fbc02d; /* Yellow background for button */
     border-radius: 5px;
     cursor: pointer;
+    border: none;
+}
+
+#about .card img {
+    border: 3px solid #0277bd; /* Blue border around image */
+    border-radius: 5px;
+}
+
+.row {
+    margin-top: 50px;
+}
+
+.col-md-5,
+.col-md-7 {
+    display: flex;
+    align-items: center;
 }
 </style>

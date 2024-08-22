@@ -249,7 +249,7 @@ export default createStore({
     },
     async updateProduct(context, payload) {
       try {
-        const { message } = await (await axios.patch(`${apiURL}products/update/${payload.productID}`, payload)).data
+        const { message } = await (await axios.patch(`${apiURL}products/update/${payload.prodID}`, payload)).data
         if (message) {
           context.dispatch('fetchProducts')
           toast.success(`${message}`, {
@@ -257,8 +257,8 @@ export default createStore({
             position: toast.POSITION.BOTTOM_CENTER
           })
         }
-      } catch (e) {
-        toast.error(`${e.message}`, {
+      } catch (err) {
+        toast.error(`${err.message}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
@@ -266,7 +266,7 @@ export default createStore({
     },
     async deleteProduct(context, id) {
       try {
-        const { message } = await (await axios.delete(`${apiURL}product/${id}`)).data
+        const { message } = await (await axios.delete(`${apiURL}products/delete/${id}`)).data
         if (message) {
           context.dispatch('fetchProducts')
           toast.success(`${message}`, {
