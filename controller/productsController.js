@@ -1,4 +1,5 @@
 
+import { json } from "express";
 import { getProductsDb, getProductDb, addProductDb, deleteProductDb , editProductsDb , recentProductsDb } from "../model/productDb.js";
 
 
@@ -22,7 +23,7 @@ const fetchProduct = async (req,res)=>{
 
 const fetchRecentProducts = async (req,res)=>{ 
     try{
-    res.json(await recentProductsDb())
+        await recentProductsDb()
     }catch(err){
         res.json({err:'There was an issue with fetching Recent Products'})
         throw err
@@ -54,18 +55,20 @@ const removeProduct = async (req,res)=>{
 
 const updateProducts = async (req,res)=>{
     let {prodName,quantity,amount,category,prodUrl,prodDesc} = req.body
-    let products = await getProductDb(req.params.id)
-
-    prodName? prodName=prodName : prodName = products.prodName
-    quantity? quantity=quantity : quantity = products.quantity
-    amount? amount=amount : amount = products.amount
-    category? category=category : category = products.category
-    prodUrl? prodUrl=prodUrl : prodUrl = products.prodUrl
-    prodDesc? prodDesc=prodDesc : prodDesc = products.prodDesc
     try{
-        res.json(await editProductsDb(req.params.id,prodName,quantity,amount,category,prodUrl,prodDesc))
+        let products = await getProductDb(req.params.id)
+        console.log(products)
+        prodName? prodName=prodName : prodName = products.prodName
+        
+        quantity? quantity=quantity : quantity = products.quantity
+        amount? amount=amount : amount = products.amount
+        category? category=category : category = products.category
+        prodUrl? prodUrl=prodUrl : prodUrl = products.prodUrl
+        prodDesc? prodDesc=prodDesc : prodDesc = products.prodDesc
+        await editProductsDb(req.params.id,prodName,quantity,amount,category,prodUrl,prodDesc)
+        res.json({message:"Product was updated successfully"})
     }catch (err){
-        res.json({message:'There was an issue with updating Product'})
+        res.json({err:'There was an issue with updating Product'})
         throw err
     }
 

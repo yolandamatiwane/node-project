@@ -6,7 +6,7 @@ const getProductsDb = async ()=>{
 }
 
 const getProductDb = async (id)=>{
-    let [data] = await pool.query(`
+    let [[data]] = await pool.query(`
         SELECT *
         FROM Products
         WHERE prodID =? `,[id])
@@ -38,11 +38,10 @@ const recentProductsDb = async()=>{
 // console.log(await recentProductsDb())
 
 const editProductsDb = async (id,prodName,quantity,amount,category,prodUrl,prodDesc)=>{
-    let [data] = await pool.query(`
+    await pool.query(`
         UPDATE Products
         SET prodName = ?,quantity =? ,amount=?,category=?,prodUrl=?,prodDesc=?
         WHERE prodID = ?`,[prodName,quantity,amount,category,prodUrl,prodDesc,id])
-    return data
 }
 
 export {getProductsDb, getProductDb, addProductDb, deleteProductDb, recentProductsDb, editProductsDb}
