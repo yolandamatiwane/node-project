@@ -8,7 +8,7 @@
     <p>Discover the perfect blend of innovation and reliability with our cutting-edge electronic appliances.
       <br> Elevate your home with our top-quality products designed to simplify your life and enhance your everyday experiences.
     </p>
-    <div class="btn"><button>Shop Now</button></div>
+    <div class="btn"><router-link class="nav-link" to="/about"><button>About Us</button></router-link></div>
     </div>
     <div class="img">
       <img src="https://kingbrink.github.io/all-images/images/appliances.png" class="" alt="pica" loading="lazy">
