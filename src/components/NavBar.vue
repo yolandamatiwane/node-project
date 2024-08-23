@@ -1,6 +1,6 @@
 
   <template>
-    <nav class="navbar navbar-expand-lg" id="navbar">
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html" id="logo"><span id="span1">K</span><span>yYola</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,7 @@ export default {
 <style>
 #navbar{
     background-color: #162052;
+    position: sticky;
 }
 #logo{
     margin-left: 15px;

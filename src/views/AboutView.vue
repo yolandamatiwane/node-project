@@ -1,5 +1,6 @@
 <template>
-  <div class="container" id="about">
+  <section>
+    <div class="container" id="about">
     <h3>About</h3>
     
     <p>At KyYola, we are passionate about bringing you the latest in electronic appliance technology, combined with unmatched reliability and style. Our journey began with a simple vision: to provide high-quality, innovative solutions that make everyday living more efficient and enjoyable. With a dedicated team of experts and a commitment to exceptional customer service, we carefully curate a selection of products that meet our rigorous standards. Whether you're upgrading your home or seeking the perfect gadget, we're here to ensure you find exactly what you need to enhance your lifestyle. Join us in experiencing the future of home appliances today.</p>
@@ -20,6 +21,7 @@
         </div>
     </div>
 </div>
+  </section>
 </template>
 
 <script>

@@ -27,14 +27,6 @@
           </div>
           <div class="modal-body">
             <form>
-              <!-- <div class="mb-3">
-                <input
-                  type="text"
-                  class="form-control w-50 mx-auto"
-                  placeholder="Product ID"
-                  v-model="payload.prodID"
-                />
-              </div> -->
               <div class="mb-3">
                 <input
                   type="text"
