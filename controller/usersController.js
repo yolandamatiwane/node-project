@@ -4,27 +4,30 @@ import {hash} from 'bcrypt'
 
 const fetchUsers = async (req,res)=>{
     try{
-        res.json(await getUsersDb())
+        await getUsersDb()
+        res.status(202).json({message:"fetched users successfully"})
     } catch(err){
-        res.json({err:"There is an issue with fetching users"})
+        res.status(404).json({err:"There is an issue with fetching users"})
         throw err
     }
 }
 
 const fetchUser = async (req,res)=>{
     try{
-        res.json(await getUserDb(req.params.id))
+        await getUserDb(req.params.id)
+        res.status(202).json({message:"Fetched user successfully"})
     } catch(err){
-        res.json({err:"There is an issue with fetching single user information"})
+        res.status(404).json({err:"There is an issue with fetching single user information"})
         throw err
     }
 }
 
 const fetchRecentUser = async (req,res)=>{
     try{
-        res.json(await recentUsersDb())
+        await recentUsersDb()
+        res.status(202).json({message:"fetched user successfully"})
     } catch(err){
-        res.json({err:"There has been an issue with fetching the recent user"})
+        res.status(404).json({err:"There has been an issue with fetching the recent user"})
         throw err
     }
 }
@@ -49,12 +52,12 @@ const addUser = async (req,res)=>{
                 }    
                 await addUserDb(firstName,lastName,userAge,Gender,userRole,emailAdd,hashedP,userProfile)
             })
-            res.json({message:"User created successfully"})
+            res.status(202).json({message:"User created successfully"})
 
             
         }
     } catch(err){
-        res.json({err:"There is an issue with creating a new user"})
+        res.status(404).json({err:"There is an issue with creating a new user"})
         throw err
     }
 }
@@ -62,17 +65,15 @@ const addUser = async (req,res)=>{
 const removeUser = async (req,res)=>{
     try{
         await deleteUserDb(req.params.id)
-        res.json({message:"User deleted successfully"})
+        res.status(202).json({message:"User deleted successfully"})
     } catch(err){
-        res.json({err:"There is an issue with deleting a user"})
+        res.status(404).json({err:"There is an issue with deleting a user"})
         throw err
     }
 }
 
 const updateUser = async (req,res)=>{
     let {firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile} = req.body
-    console.log(req.body);
-    
     try{
         let user = await getUserDb(req.params.id)
 
@@ -83,7 +84,6 @@ const updateUser = async (req,res)=>{
         userRole? userRole=userRole : userRole = user.userRole
         emailAdd? emailAdd=emailAdd : emailAdd = user.emailAdd
         userProfile? userProfile=userProfile : userProfile = user.userProfile
-        console.log(user)
         if(userPass){
             hash(userPass,10,async (err,hashedP)=>{
                 if(err){
@@ -100,9 +100,9 @@ const updateUser = async (req,res)=>{
             console.log(userPass);
             await editUsersDb(req.params.id,firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile)
         }
-        res.json({message:"User updated successfully"})
+        res.status(202).json({message:"User updated successfully"})
     }catch(err){
-        res.json({err:"There is an issue with updating the user"})    
+        res.status(404).json({err:"There is an issue with updating the user"})    
         throw err
     }
 }
@@ -110,12 +110,12 @@ const updateUser = async (req,res)=>{
 
 const loginUser = (req,res)=>{
     try{
-        res.json({
+        res.status(202).json({
             message:"User logged in successfully",
             token:req.body.token
         })
     } catch(err){
-        res.json({err:"There is an issue with logging in the user"})
+        res.status(404).json({err:"There is an issue with logging in the user"})
     }
 }
 export {fetchUsers, fetchUser, fetchRecentUser, addUser, removeUser, updateUser, loginUser}

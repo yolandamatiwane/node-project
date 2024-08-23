@@ -5,18 +5,20 @@ import { getProductsDb, getProductDb, addProductDb, deleteProductDb , editProduc
 
 const fetchProducts = async (req,res)=>{
     try{
-        res.json(await getProductsDb())
+        await getProductsDb()
+        res.status(202).json({message:"Fetched products successfully"})
     }catch (err){
-        res.json({err:'There was an issue with fetching Products'})
+        res.status(404).json({err:'There was an issue with fetching Products'})
         throw err
     }
 }
 
 const fetchProduct = async (req,res)=>{
     try{
-        res.json(await getProductDb(req.params.id))
+        await getProductDb(req.params.id)
+        res.status(202).json({message:"Fetched single product successfully"})
     }catch(err){
-        res.json({err:'There was an issue with fetching single Product'})
+        res.status(404).json({err:'There was an issue with fetching single Product'})
         throw err
     }
 }
@@ -25,7 +27,7 @@ const fetchRecentProducts = async (req,res)=>{
     try{
         await recentProductsDb()
     }catch(err){
-        res.json({err:'There was an issue with fetching Recent Products'})
+        res.status(404).json({err:'There was an issue with fetching Recent Products'})
         throw err
     }
 }
@@ -35,9 +37,9 @@ const addProduct = async (req,res)=>{
     let {prodName,quantity,amount,category,prodUrl,prodDesc} = req.body
     try{
         await addProductDb(prodName,quantity,amount,category,prodUrl,prodDesc)
-        res.json({message: 'Product Added Successfully'})
+        res.status(202).json({message: 'Product Added Successfully'})
     }catch(err){
-        res.json({err:'There was an issue with adding Product'})
+        res.status(404).json({err:'There was an issue with adding Product'})
         throw err
     }
 }
@@ -45,9 +47,9 @@ const addProduct = async (req,res)=>{
 const removeProduct = async (req,res)=>{
     try{
         await deleteProductDb(req.params.id)
-        res.json({message:'Product has been deleted'})
+        res.status(202).json({message:'Product has been deleted'})
     } catch(err){
-        res.json({err:'There was an issue with removing Product'})
+        res.status(404).json({err:'There was an issue with removing Product'})
         throw err
     }
 }
@@ -66,9 +68,9 @@ const updateProducts = async (req,res)=>{
         prodUrl? prodUrl=prodUrl : prodUrl = products.prodUrl
         prodDesc? prodDesc=prodDesc : prodDesc = products.prodDesc
         await editProductsDb(req.params.id,prodName,quantity,amount,category,prodUrl,prodDesc)
-        res.json({message:"Product was updated successfully"})
+        res.status(202).json({message:"Product was updated successfully"})
     }catch (err){
-        res.json({err:'There was an issue with updating Product'})
+        res.status(404).json({err:'There was an issue with updating Product'})
         throw err
     }
 

@@ -7,7 +7,7 @@ config()
 const checkUser = async (req,res,next)=>{
     const {emailAdd,userPass} = req.body;
     if (!emailAdd || !userPass) {
-        return res.status(400).send( "Missing required fields" );
+        return res.status(404).send( "Missing required fields" );
     }
     let data  = (await getLoginDb(emailAdd))
     let hashedPassword = data.userPass
@@ -31,7 +31,7 @@ const checkUser = async (req,res,next)=>{
         req.body.token = token
         next()
     }else{
-        res.send('Password is incorrect')
+        res.status(404).send('Password is incorrect')
     }
 }
 
