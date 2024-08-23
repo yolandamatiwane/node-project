@@ -80,24 +80,20 @@ export default createStore({
     async register(context, payload) {
       try {
         const { message, err} = await (await axios.post(`${apiURL}users/register`, payload)).data
-      // const data = await (await axios.post(`${apiURL}users/register`, payload)).data
-      // console.log(data)
-
         if (message) {
           context.dispatch('fetchUsers')
           toast.success(`${message}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
-          // router.push({ name: 'login' })
         } else {
           toast.error(`${err}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
         }
-      } catch (e) {
-        toast.error(`${e.message}`, {
+      } catch (err) {
+        toast.error(`${err}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
@@ -128,7 +124,8 @@ export default createStore({
         const { message, err } = await (await axios.delete(`${apiURL}users/delete/${id}`)).data
         if (message) {
           context.dispatch('fetchUsers')
-        } else {
+        } 
+        else {
           toast.error(`${err}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
@@ -164,8 +161,8 @@ export default createStore({
             position: toast.POSITION.BOTTOM_CENTER
           })
         }
-      } catch (e) {
-        toast.error(`${e.message}`, {
+      } catch (err) {
+        toast.error(`${err}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
@@ -241,7 +238,7 @@ export default createStore({
         }
       } 
       catch (err) {
-        toast.error(`${e.message}`, {
+        toast.error(`${err}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })

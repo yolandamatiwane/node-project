@@ -28,15 +28,20 @@
             <li><a class="dropdown-item" @click="sortByPriceAsc">Ascending</a></li>
             <li><a class="dropdown-item" @click="sortByPriceDesc">Descending</a></li>
           </ul>
+ 
+        </div>
+
+        <div class="my-3">
           <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false">
             Sort by Name
           </button>
-        </div>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" @click="sortByNameAsc">Ascending</a></li>
           <li><a class="dropdown-item" @click="sortByNameDesc">Descending</a></li>
         </ul>
+        </div>
+
         </div>
         </div>
         <div class="row gap-2 justify-content-center my-2" v-if="filterProducts">
@@ -95,6 +100,8 @@ export default{
     },
     sortByPriceDesc(){
       this.$store.state.products.sort(function(a,b){
+        console.log('sorting');
+        
         return b.amount-a.amount
       })
     }
@@ -104,6 +111,10 @@ export default{
     },
     sortByNameDesc(){
       return this.$store.state.products.sort(function(a,b){
+        console.log(a.prodName);
+        console.log('sorted');
+
+        
         return b.prodName.localeCompare(a.prodName)
       })
     },
