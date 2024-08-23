@@ -11,7 +11,7 @@
     <div class="btn"><router-link class="nav-link" to="/about"><button>About Us</button></router-link></div>
     </div>
     <div class="img">
-      <img src="https://kingbrink.github.io/all-images/images/appliances.png" class="" alt="pica" loading="lazy">
+      <img src="https://kingbrink.github.io/all-images/images/appliances.png" class="" alt="pica" loading="lazy" data-aos="flip-left" data-aos-duration="1500">
     </div>
     <!-- <div class="box">
       <div class="infoma">
