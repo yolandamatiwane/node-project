@@ -79,17 +79,17 @@ export default createStore({
     },
     async register(context, payload) {
       try {
-        const { message, err, token } = await (await axios.post(`${apiURL}users/register`, payload)).data
+        const { message, err} = await (await axios.post(`${apiURL}users/register`, payload)).data
       // const data = await (await axios.post(`${apiURL}users/register`, payload)).data
       // console.log(data)
 
-        if (token) {
+        if (message) {
           context.dispatch('fetchUsers')
-          toast.success(`${msg}`, {
+          toast.success(`${message}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
-          router.push({ name: 'login' })
+          // router.push({ name: 'login' })
         } else {
           toast.error(`${err}`, {
             autoClose: 2000,

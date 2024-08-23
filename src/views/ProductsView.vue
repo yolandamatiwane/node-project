@@ -40,9 +40,9 @@
         </div>
         </div>
         <div class="row gap-2 justify-content-center my-2" v-if="filterProducts">
-            <Card v-for="product in filterProducts || searching" :key="product.prodID">
+            <Card v-for="product in filterProducts" :key="product.prodID" >
                 <template #cardHeader>
-                    <img :src="product.prodUrl" loading="lazy" class="img-fluid" style="height: 200px;" :alt="product.prodName">
+                    <img :src="product.prodUrl" loading="lazy" class="img-fluid" style="height: 200px;" :alt="product.prodName" data-aos="flip-right" data-aos-duration="1500">
                 </template>
                 <template #cardBody>
                     <h5 class="card-title fw-bold">{{ product.prodName }}</h5>
@@ -64,67 +64,60 @@
 </template>
 
 <script>
-
 import Spinner from '@/components/Spinner.vue'
 import Card from '@/components/Card.vue'
-
 export default{
-    data(){
-        return{
-            selectedCategory:'',
-            search:'',
-
-
-        }
+  data(){
+    return{
+      selectedCategory:'',
+      search:''
+    }
+  },
+  components:{
+    Card,
+    Spinner
+  },
+  computed:{
+    filterProducts(){
+      let products = this.$store.state.products || []
+      if(this.selectedCategory){
+        products = products.filter(product=> product.category === this.selectedCategory)
+      }
+      if (this.search) {
+        products = products.filter(product => product.prodName.toLowerCase().includes(this.search.toLowerCase()))
+      }
+      return products
     },
-    components:{
-        Card,
-        Spinner
+    sortByPriceAsc(){
+      this.$store.state.products.sort(function(a,b){
+        return a.amount-b.amount
+      })
     },
-    computed:{
-        filterProducts(){
-            let products = this.$store.state.products
-
-            if(this.selectedCategory){
-                products = products.filter(product=> product.category === this.selectedCategory)
-            }
-            
-            return products
-        },
-        sortByPriceAsc(){
-            this.$store.state.products.sort(function(a,b){
-                return a.amount-b.amount
-            })
-        },
-        sortByPriceDesc(){
-            this.$store.state.products.sort(function(a,b){
-                return b.amount-a.amount
-            })
-        },
-        sortByNameDesc(){
-            return this.$store.state.products.sort(function(a,b){
-                return b.prodName.localeCompare(a.prodName)
-            })
-        },
-        searching(){
-             let prod = this.$store.state.products.filter( product =>{
-                return product.prodName.toLowerCase().includes(this.search)
-            })
-            return prod
-            console.log(prod)
-        }
+    sortByPriceDesc(){
+      this.$store.state.products.sort(function(a,b){
+        return b.amount-a.amount
+      })
+    }
+  },
+  methods:{
+    searching(){
     },
-    methods:{
-        
+    sortByNameDesc(){
+      return this.$store.state.products.sort(function(a,b){
+        return b.prodName.localeCompare(a.prodName)
+      })
     },
-    mounted() {
-        this.$store.dispatch('fetchProducts'),
-        this.products = this.$store.state.products,
-        this.filterProducts
-        
+    sortByNameAsc(){
+      return this.$store.state.products.sort(function(a,b){
+        return a.prodName.localeCompare(b.prodName)
+      })
+    }
+  },
+  mounted() {
+    this.$store.dispatch('fetchProducts'),
+    this.filterProducts
 }
 }
-
 </script>
 
 <style scoped>

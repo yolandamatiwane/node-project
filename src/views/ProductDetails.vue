@@ -6,7 +6,7 @@
         <div class="row justify-content-center" v-if="product">
             <Card>
                 <template #cardHeader>
-                    <img :src="product.prodUrl" loading="lazy" class="img-fluid" style="width: 200px;" :alt="product.prodName">
+                    <img :src="product.prodUrl" loading="lazy" class="img-fluid" style="width: 200px;" :alt="product.prodName" data-aos="flip-right" data-aos-duration="1500">
                 </template>
                 <template #cardBody>
                     <h5 class="card-title fw-bold">{{ product.prodName }}</h5>

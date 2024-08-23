@@ -145,7 +145,7 @@
       addingUser() {
         try {
           this.$store.dispatch("register", this.payload);
-          location.reload()
+          // location.reload()
         } catch (error) {
           console.error(error);
         }
