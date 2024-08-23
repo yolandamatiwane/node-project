@@ -57,7 +57,11 @@ const removeProduct = async (req,res)=>{
 
 const updateProducts = async (req,res)=>{
     let {prodName,quantity,amount,category,prodUrl,prodDesc} = req.body
+    if (!prodName || !quantity || !amount || !category || !prodUrl || !prodDesc) {
+        return res.status(400).json({err:"Missing required fields" });
+    }
     try{
+
         let products = await getProductDb(req.params.id)
         console.log(products)
         prodName? prodName=prodName : prodName = products.prodName

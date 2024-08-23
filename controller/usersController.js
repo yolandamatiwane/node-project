@@ -37,7 +37,7 @@ const addUser = async (req,res)=>{
         let {firstName,lastName,userAge,Gender,userRole,emailAdd,userPass,userProfile} = req.body
 
         if (!firstName || !lastName || !userAge || !Gender || !emailAdd || !userPass) {
-            return res.status(400).json({message:"Missing required fields" });
+            return res.status(400).json({err:"Missing required fields" });
         }
         else {
             let oldEmailAdd = (await getLoginDb(emailAdd)).emailAdd
