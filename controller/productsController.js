@@ -35,6 +35,9 @@ const fetchRecentProducts = async (req,res)=>{
 
 const addProduct = async (req,res)=>{
     let {prodName,quantity,amount,category,prodUrl,prodDesc} = req.body
+    if (!prodName || !quantity || !amount || !category || !prodUrl || !prodDesc) {
+        return res.status(400).json({err:"Missing required fields" });
+    }
     try{
         await addProductDb(prodName,quantity,amount,category,prodUrl,prodDesc)
         res.status(202).json({message: 'Product Added Successfully'})
@@ -57,9 +60,6 @@ const removeProduct = async (req,res)=>{
 
 const updateProducts = async (req,res)=>{
     let {prodName,quantity,amount,category,prodUrl,prodDesc} = req.body
-    if (!prodName || !quantity || !amount || !category || !prodUrl || !prodDesc) {
-        return res.status(400).json({err:"Missing required fields" });
-    }
     try{
 
         let products = await getProductDb(req.params.id)
