@@ -4,8 +4,8 @@ import {hash} from 'bcrypt'
 
 const fetchUsers = async (req,res)=>{
     try{
-        await getUsersDb()
-        res.status(202).json({message:"fetched users successfully"})
+        
+        res.status(202).json(await getUsersDb())
     } catch(err){
         res.status(404).json({err:"There is an issue with fetching users"})
         throw err
@@ -14,8 +14,8 @@ const fetchUsers = async (req,res)=>{
 
 const fetchUser = async (req,res)=>{
     try{
-        await getUserDb(req.params.id)
-        res.status(202).json({message:"Fetched user successfully"})
+        
+        res.status(202).json(await getUserDb(req.params.id))
     } catch(err){
         res.status(404).json({err:"There is an issue with fetching single user information"})
         throw err
@@ -24,8 +24,8 @@ const fetchUser = async (req,res)=>{
 
 const fetchRecentUser = async (req,res)=>{
     try{
-        await recentUsersDb()
-        res.status(202).json({message:"fetched user successfully"})
+        
+        res.status(202).json(await recentUsersDb())
     } catch(err){
         res.status(404).json({err:"There has been an issue with fetching the recent user"})
         throw err

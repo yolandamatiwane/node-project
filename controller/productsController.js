@@ -5,8 +5,8 @@ import { getProductsDb, getProductDb, addProductDb, deleteProductDb , editProduc
 
 const fetchProducts = async (req,res)=>{
     try{
-        await getProductsDb()
-        res.status(202).json({message:"Fetched products successfully"})
+        
+        res.status(202).json(await getProductsDb())
     }catch (err){
         res.status(404).json({err:'There was an issue with fetching Products'})
         throw err
@@ -15,8 +15,8 @@ const fetchProducts = async (req,res)=>{
 
 const fetchProduct = async (req,res)=>{
     try{
-        await getProductDb(req.params.id)
-        res.status(202).json({message:"Fetched single product successfully"})
+        
+        res.status(202).json(await getProductDb(req.params.id))
     }catch(err){
         res.status(404).json({err:'There was an issue with fetching single Product'})
         throw err
